@@ -75,6 +75,8 @@ const generateData = (nodeName: string): ForecastData[] => {
   return data;
 };
 
+import InfoTooltip from './InfoTooltip';
+
 export default function TimelineForecast({ activeNode }: { activeNode: string }) {
   const [data, setData] = useState<ForecastData[]>([]);
 
@@ -85,25 +87,30 @@ export default function TimelineForecast({ activeNode }: { activeNode: string })
   return (
     <div style={{
       width: '100%', 
-      height: '350px', 
+      height: '100%',
+      minHeight: '350px',
       backgroundColor: '#12161c', 
-      borderRadius: '8px',
-      padding: '16px',
-      border: '1px solid #1f2833',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-      marginTop: '24px' // Adding margin to separate from the Status Trackers
+      borderRadius: '16px',
+      padding: '24px',
+      border: '1px solid rgba(69, 162, 158, 0.2)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
+      display: 'flex',
+      flexDirection: 'column'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-          48/24 Demand Forecast
-        </h3>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            48/24 Demand Forecast
+          </h3>
+          <InfoTooltip text="Visualizes 48 hours of historical actuals against 24 hours of future predictions. Watch for orange dashed spikes indicating predicted grid instability." />
+        </div>
         <span style={{ fontSize: '0.8rem', color: '#8a8d91', textTransform: 'uppercase' }}>
           Predictive Analytics Engine Active
         </span>
       </div>
       
-      <div style={{ width: '100%', height: 'calc(100% - 36px)' }}>
-        <ResponsiveContainer width="99%" height="100%">
+      <div style={{ flex: 1, width: '100%', minHeight: '300px' }}>
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
             margin={{ top: 5, right: 10, left: 0, bottom: 5 }}

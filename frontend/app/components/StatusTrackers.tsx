@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import styles from '../page.module.css';
+import InfoTooltip from './InfoTooltip';
 
 interface Incident {
   id: string;
@@ -84,18 +85,25 @@ export default function StatusTrackers({ activeNode }: { activeNode: string }) {
   return (
     <div style={{
       width: '100%', 
+      height: '100%',
       backgroundColor: '#12161c', 
-      borderRadius: '8px',
-      padding: '16px',
-      border: '1px solid #1f2833',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+      borderRadius: '16px',
+      padding: '24px',
+      border: '1px solid rgba(69, 162, 158, 0.2)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
       display: 'flex',
       flexDirection: 'column',
       gap: '20px'
     }}>
-      
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
+        <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+          System Status
+        </h3>
+        <InfoTooltip text="State lights indicate overall health. The Anomaly Gauge flashes orange if the score exceeds 0.7, automatically adding a timestamped warning to the Incident Log below." />
+      </div>
+
       {/* Top Row: Lights & Gauge */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         
         {/* Sub-Component A: State Lights */}
         <div>

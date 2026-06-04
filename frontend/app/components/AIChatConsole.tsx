@@ -8,6 +8,8 @@ interface Message {
   text: string;
 }
 
+import InfoTooltip from './InfoTooltip';
+
 export default function AIChatConsole({ activeNode }: { activeNode: string }) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -91,21 +93,33 @@ export default function AIChatConsole({ activeNode }: { activeNode: string }) {
       flexDirection: 'column',
       height: '100%',
       width: '100%',
-      backgroundColor: '#12161c', // Match sidebar bg
+      backgroundColor: '#12161c',
+      borderRadius: '16px',
+      padding: '24px',
+      border: '1px solid rgba(69, 162, 158, 0.2)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
       position: 'relative'
     }}>
       {/* Header Area */}
       <div style={{
         padding: '0 0 16px 0',
         borderBottom: '1px solid #1f2833',
-        flexShrink: 0
+        flexShrink: 0,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start'
       }}>
-        <h3 style={{ margin: 0, color: '#45a29e', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          AI Engineering Console
-        </h3>
-        <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: '#8a8d91' }}>
-          Direct semantic interface
-        </p>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <h3 style={{ margin: 0, color: '#45a29e', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              AI Engineering Console
+            </h3>
+            <InfoTooltip text="Ask the diagnostic backend questions about current telemetry, anomalies, or historical trends. The AI automatically contextualizes responses based on the Active Node." />
+          </div>
+          <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: '#8a8d91' }}>
+            Direct semantic interface
+          </p>
+        </div>
       </div>
 
       {/* Sub-Component A: The Dialogue Feed */}

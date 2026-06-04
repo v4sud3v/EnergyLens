@@ -11,6 +11,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import InfoTooltip from './InfoTooltip';
 
 interface DataPoint {
   time: string;
@@ -72,17 +73,23 @@ export default function LiveMetricsGraph({ activeNode }: { activeNode: string })
   return (
     <div style={{
       width: '100%', 
-      height: '350px', 
+      height: '100%', 
+      minHeight: '350px',
       backgroundColor: '#12161c', 
-      borderRadius: '8px',
-      padding: '16px',
-      border: '1px solid #1f2833',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
+      borderRadius: '16px',
+      padding: '24px',
+      border: '1px solid rgba(69, 162, 158, 0.2)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
+      display: 'flex',
+      flexDirection: 'column'
     }}>
-      <h3 style={{ margin: '0 0 16px 0', color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-        Live Telemetry
-      </h3>
-      <div style={{ width: '100%', height: 'calc(100% - 32px)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+        <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+          Live Telemetry
+        </h3>
+        <InfoTooltip text="Dual-axis chart continuously mapping Active Power (MW) and Line Voltage (kV) over a 20-second sliding window." />
+      </div>
+      <div style={{ flex: 1, width: '100%', minHeight: '300px' }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
@@ -115,7 +122,7 @@ export default function LiveMetricsGraph({ activeNode }: { activeNode: string })
             />
             
             <Tooltip 
-              contentStyle={{ backgroundColor: '#0b0c10', border: '1px solid #45a29e', borderRadius: '4px' }}
+              contentStyle={{ backgroundColor: '#0b0c10', border: '1px solid #45a29e', borderRadius: '8px' }}
               itemStyle={{ color: '#c5c6c7' }}
             />
             <Legend wrapperStyle={{ paddingTop: '10px' }}/>

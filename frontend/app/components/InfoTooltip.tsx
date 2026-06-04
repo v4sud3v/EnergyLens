@@ -31,7 +31,7 @@ export default function InfoTooltip({ text }: { text: string }) {
       {show && (
         <div style={{
           position: 'absolute',
-          bottom: '120%',
+          top: '150%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: 'max-content',
@@ -39,12 +39,12 @@ export default function InfoTooltip({ text }: { text: string }) {
           backgroundColor: '#1f2833',
           border: '1px solid #66fcf1',
           color: '#c5c6c7',
-          padding: '8px 12px',
-          borderRadius: '4px',
+          padding: '12px',
+          borderRadius: '8px',
           fontSize: '0.8rem',
           lineHeight: '1.4',
-          zIndex: 100,
-          boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+          zIndex: 999999,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.8)',
           whiteSpace: 'normal',
           textTransform: 'none',
           letterSpacing: 'normal'
