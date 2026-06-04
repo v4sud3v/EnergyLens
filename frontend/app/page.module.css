@@ -78,3 +78,13 @@
   padding: 24px;
   overflow-y: auto;
 }
+
+@keyframes flashOrange {
+  0% { background-color: #ff9800; box-shadow: 0 0 10px #ff9800; }
+  50% { background-color: #e65100; box-shadow: 0 0 20px #e65100; }
+  100% { background-color: #ff9800; box-shadow: 0 0 10px #ff9800; }
+}
+
+.flashingOrange {
+  animation: flashOrange 1s infinite;
+}

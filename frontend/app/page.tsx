@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./page.module.css";
 import LiveMetricsGraph from "./components/LiveMetricsGraph";
+import StatusTrackers from "./components/StatusTrackers";
 
 export default function Home() {
   const [selectedNode, setSelectedNode] = useState("Substation North");
@@ -34,10 +35,7 @@ export default function Home() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "24px" }}>
           <LiveMetricsGraph activeNode={selectedNode} />
           
-          <div style={{ padding: "16px", backgroundColor: "#12161c", borderRadius: "8px", border: "1px solid #1f2833" }}>
-            <h2 style={{ color: "#c5c6c7", marginBottom: "1rem", fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>System Status</h2>
-            <p style={{ color: "#8a8d91" }}>Additional visualizations and tracking panels for <strong>{selectedNode}</strong> will be displayed here.</p>
-          </div>
+          <StatusTrackers activeNode={selectedNode} />
         </div>
       </main>
       <aside className={styles.sidebar}>
