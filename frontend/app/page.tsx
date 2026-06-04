@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import LiveMetricsGraph from "./components/LiveMetricsGraph";
 import StatusTrackers from "./components/StatusTrackers";
+import TimelineForecast from "./components/TimelineForecast";
 
 export default function Home() {
   const [selectedNode, setSelectedNode] = useState("Substation North");
@@ -36,6 +37,8 @@ export default function Home() {
           <LiveMetricsGraph activeNode={selectedNode} />
           
           <StatusTrackers activeNode={selectedNode} />
+          
+          <TimelineForecast activeNode={selectedNode} />
         </div>
       </main>
       <aside className={styles.sidebar}>
