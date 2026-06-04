@@ -1,0 +1,80 @@
+.container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 1fr 350px;
+  grid-template-areas:
+    "header header"
+    "main sidebar";
+  background-color: #0b0c10; /* Base background */
+  color: #c5c6c7;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  grid-area: header;
+  background-color: #1f2833;
+  border-bottom: 1px solid #45a29e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #66fcf1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.selectorContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectorLabel {
+  font-size: 0.875rem;
+  color: #c5c6c7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dropdown {
+  background-color: #0b0c10;
+  color: #66fcf1;
+  border: 1px solid #45a29e;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown:hover, .dropdown:focus {
+  border-color: #66fcf1;
+  box-shadow: 0 0 8px rgba(102, 252, 241, 0.3);
+}
+
+.main {
+  grid-area: main;
+  background-color: #0b0c10;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #12161c;
+  border-left: 1px solid #1f2833;
+  padding: 24px;
+  overflow-y: auto;
+}
