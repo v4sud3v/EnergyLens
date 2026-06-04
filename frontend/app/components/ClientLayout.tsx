@@ -12,12 +12,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         flexDirection: 'column',
         height: '100vh',
         width: '100vw',
-        backgroundColor: '#0b0c10',
-        color: '#c5c6c7',
-        fontFamily: "'Inter', system-ui, -apple-system, sans-serif"
+        backgroundColor: 'var(--background)',
+        color: 'var(--foreground)'
       }}>
         <Header />
-        <main style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
+        <main style={{ flex: 1, overflowY: 'auto', padding: '40px' }}>
           {children}
         </main>
       </div>

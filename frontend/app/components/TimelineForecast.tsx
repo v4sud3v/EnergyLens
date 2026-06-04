@@ -9,8 +9,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-  ReferenceLine
+  ReferenceLine,
+  ResponsiveContainer
 } from 'recharts';
 
 interface ForecastData {
@@ -88,23 +88,23 @@ export default function TimelineForecast({ activeNode }: { activeNode: string })
     <div style={{
       width: '100%', 
       height: '100%',
-      minHeight: '350px',
-      backgroundColor: '#12161c', 
-      borderRadius: '16px',
-      padding: '24px',
-      border: '1px solid rgba(69, 162, 158, 0.2)',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
+      minHeight: '400px',
+      backgroundColor: 'var(--card-bg)', 
+      borderRadius: '24px',
+      padding: '32px',
+      border: '1px solid var(--border-color)',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+          <h3 style={{ margin: 0, color: 'var(--foreground)', fontSize: '1.1rem', fontWeight: 600, letterSpacing: '-0.01em' }}>
             48/24 Demand Forecast
           </h3>
           <InfoTooltip text="Visualizes 48 hours of historical actuals against 24 hours of future predictions. Watch for orange dashed spikes indicating predicted grid instability." />
         </div>
-        <span style={{ fontSize: '0.8rem', color: '#8a8d91', textTransform: 'uppercase' }}>
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
           Predictive Analytics Engine Active
         </span>
       </div>
@@ -115,7 +115,7 @@ export default function TimelineForecast({ activeNode }: { activeNode: string })
             data={data}
             margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#2c3e50" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
             <XAxis 
               dataKey="timestamp" 
               type="number"
@@ -124,46 +124,54 @@ export default function TimelineForecast({ activeNode }: { activeNode: string })
                 const point = data.find(d => d.timestamp === unixTime);
                 return point && point.timeLabel ? point.timeLabel : '';
               }}
-              stroke="#8a8d91" 
-              tick={{ fill: '#8a8d91', fontSize: 12 }} 
+              stroke="var(--text-secondary)" 
+              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} 
               tickMargin={10} 
+              axisLine={false}
+              tickLine={false}
             />
             
             <YAxis 
-              stroke="#8a8d91" 
-              tick={{ fill: '#8a8d91', fontSize: 12 }}
-              label={{ value: 'Demand (MW)', angle: -90, position: 'insideLeft', fill: '#8a8d91', style: { textAnchor: 'middle' } }}
+              stroke="var(--foreground)" 
+              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              label={{ value: 'Demand (MW)', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', offset: -5 }}
+              domain={[60, 160]}
+              axisLine={false}
+              tickLine={false}
             />
             
             <Tooltip 
-              contentStyle={{ backgroundColor: '#0b0c10', border: '1px solid #45a29e', borderRadius: '4px' }}
-              itemStyle={{ color: '#c5c6c7' }}
+              contentStyle={{ backgroundColor: 'rgba(28, 28, 30, 0.8)', backdropFilter: 'blur(10px)', border: '1px solid var(--border-color)', borderRadius: '12px' }}
+              itemStyle={{ color: 'var(--foreground)' }}
               labelFormatter={(label) => new Date(label as number).toLocaleString([], { dateStyle: 'short', timeStyle: 'short'})}
             />
-            <Legend wrapperStyle={{ paddingTop: '10px' }}/>
+            <Legend wrapperStyle={{ paddingTop: '20px' }} iconType="circle" />
             
-            <ReferenceLine x={data.find(d => d.timeLabel === 'Now')?.timestamp} stroke="#45a29e" strokeDasharray="3 3" label={{ position: 'top', value: 'CURRENT TIME', fill: '#45a29e', fontSize: 10 }} />
+            <ReferenceLine x={data.find(d => d.timeLabel === 'Now')?.timestamp} stroke="var(--accent-blue)" strokeDasharray="3 3" label={{ position: 'top', value: 'CURRENT TIME', fill: 'var(--accent-blue)', fontSize: 10 }} />
 
+            {/* Historical Actuals */}
             <Line 
               type="monotone" 
               dataKey="actual" 
-              name="Historical Demand"
-              stroke="#66fcf1" 
+              name="Historical Actuals"
+              stroke="var(--accent-blue)" 
               strokeWidth={3}
               dot={false}
-              activeDot={{ r: 6 }}
-              isAnimationActive={true} 
+              activeDot={{ r: 6, strokeWidth: 0 }}
+              isAnimationActive={false} 
             />
+            
+            {/* Future Predictions */}
             <Line 
               type="monotone" 
               dataKey="forecast" 
-              name="Predicted Forecast"
-              stroke="#ff3d00" 
+              name="Predicted Demand"
+              stroke="var(--accent-orange)" 
               strokeWidth={3}
               strokeDasharray="5 5"
               dot={false}
-              activeDot={{ r: 8, fill: '#ff3d00' }}
-              isAnimationActive={true} 
+              activeDot={{ r: 6, strokeWidth: 0 }}
+              isAnimationActive={false} 
             />
           </LineChart>
         </ResponsiveContainer>

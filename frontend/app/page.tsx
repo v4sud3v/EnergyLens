@@ -13,14 +13,14 @@ export default function Home() {
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: '2fr 1fr',
+      gridTemplateColumns: '1.5fr 1fr',
       gridTemplateRows: 'auto auto',
-      gap: '24px',
-      maxWidth: '1600px',
+      gap: '32px',
+      maxWidth: '1800px',
       margin: '0 auto',
       height: '100%'
     }}>
-      {/* Top Left: Live Metrics (Spans 1 col, but 2fr width) */}
+      {/* Top Left: Live Metrics */}
       <div style={{ gridColumn: '1 / 2', gridRow: '1 / 2', minWidth: 0 }}>
         <LiveMetricsGraph activeNode={activeNode} />
       </div>

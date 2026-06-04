@@ -74,17 +74,17 @@ export default function LiveMetricsGraph({ activeNode }: { activeNode: string })
     <div style={{
       width: '100%', 
       height: '100%', 
-      minHeight: '350px',
-      backgroundColor: '#12161c', 
-      borderRadius: '16px',
-      padding: '24px',
-      border: '1px solid rgba(69, 162, 158, 0.2)',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.4)',
+      minHeight: '400px',
+      backgroundColor: 'var(--card-bg)', 
+      borderRadius: '24px',
+      padding: '32px',
+      border: '1px solid var(--border-color)',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-        <h3 style={{ margin: 0, color: '#c5c6c7', fontSize: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+        <h3 style={{ margin: 0, color: 'var(--foreground)', fontSize: '1.1rem', fontWeight: 600, letterSpacing: '-0.01em' }}>
           Live Telemetry
         </h3>
         <InfoTooltip text="Dual-axis chart continuously mapping Active Power (MW) and Line Voltage (kV) over a 20-second sliding window." />
@@ -95,47 +95,53 @@ export default function LiveMetricsGraph({ activeNode }: { activeNode: string })
             data={data}
             margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#2c3e50" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
             <XAxis 
               dataKey="time" 
-              stroke="#8a8d91" 
-              tick={{ fill: '#8a8d91', fontSize: 12 }} 
+              stroke="var(--text-secondary)" 
+              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} 
               tickMargin={10} 
+              axisLine={false}
+              tickLine={false}
             />
             
             {/* Left Y-Axis for Power (MW) */}
             <YAxis 
               yAxisId="left" 
-              stroke="#66fcf1" 
-              tick={{ fill: '#66fcf1', fontSize: 12 }}
-              label={{ value: 'Active Power (MW)', angle: -90, position: 'insideLeft', fill: '#66fcf1', style: { textAnchor: 'middle' } }}
+              stroke="var(--accent-blue)" 
+              tick={{ fill: 'var(--accent-blue)', fontSize: 12 }}
+              label={{ value: 'Active Power (MW)', angle: -90, position: 'insideLeft', fill: 'var(--accent-blue)', style: { textAnchor: 'middle' }, offset: -5 }}
+              axisLine={false}
+              tickLine={false}
             />
             
             {/* Right Y-Axis for Voltage (kV) */}
             <YAxis 
               yAxisId="right" 
               orientation="right" 
-              stroke="#ff9800" 
-              tick={{ fill: '#ff9800', fontSize: 12 }}
-              label={{ value: 'Line Voltage (kV)', angle: 90, position: 'insideRight', fill: '#ff9800', style: { textAnchor: 'middle' } }}
+              stroke="var(--accent-orange)" 
+              tick={{ fill: 'var(--accent-orange)', fontSize: 12 }}
+              label={{ value: 'Line Voltage (kV)', angle: 90, position: 'insideRight', fill: 'var(--accent-orange)', style: { textAnchor: 'middle' }, offset: -5 }}
               domain={['dataMin - 5', 'dataMax + 5']}
+              axisLine={false}
+              tickLine={false}
             />
             
             <Tooltip 
-              contentStyle={{ backgroundColor: '#0b0c10', border: '1px solid #45a29e', borderRadius: '8px' }}
-              itemStyle={{ color: '#c5c6c7' }}
+              contentStyle={{ backgroundColor: 'rgba(28, 28, 30, 0.8)', backdropFilter: 'blur(10px)', border: '1px solid var(--border-color)', borderRadius: '12px' }}
+              itemStyle={{ color: 'var(--foreground)' }}
             />
-            <Legend wrapperStyle={{ paddingTop: '10px' }}/>
+            <Legend wrapperStyle={{ paddingTop: '20px' }} iconType="circle" />
             
             <Line 
               yAxisId="left"
               type="monotone" 
               dataKey="power" 
               name="Power (MW)"
-              stroke="#66fcf1" 
-              strokeWidth={2}
+              stroke="var(--accent-blue)" 
+              strokeWidth={3}
               dot={false}
-              activeDot={{ r: 6 }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
               isAnimationActive={false} 
             />
             <Line 
@@ -143,10 +149,10 @@ export default function LiveMetricsGraph({ activeNode }: { activeNode: string })
               type="monotone" 
               dataKey="voltage" 
               name="Voltage (kV)"
-              stroke="#ff9800" 
-              strokeWidth={2}
+              stroke="var(--accent-orange)" 
+              strokeWidth={3}
               dot={false}
-              activeDot={{ r: 6 }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
               isAnimationActive={false} 
             />
           </LineChart>
