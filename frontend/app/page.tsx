@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import LiveMetricsGraph from "./components/LiveMetricsGraph";
 import StatusTrackers from "./components/StatusTrackers";
 import TimelineForecast from "./components/TimelineForecast";
+import AIChatConsole from "./components/AIChatConsole";
 
 export default function Home() {
   const [selectedNode, setSelectedNode] = useState("Substation North");
@@ -42,9 +43,7 @@ export default function Home() {
         </div>
       </main>
       <aside className={styles.sidebar}>
-        {/* Communication sidebar */}
-        <h3 style={{ color: "#45a29e", fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Comms Feed</h3>
-        <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#8a8d91" }}>Awaiting signals from {selectedNode}...</p>
+        <AIChatConsole activeNode={selectedNode} />
       </aside>
     </div>
   );
